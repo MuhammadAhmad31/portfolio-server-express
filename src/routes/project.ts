@@ -1,11 +1,6 @@
 import { Router } from "express";
-import {
-  create,
-  getAll,
-  getById,
-  remove,
-  update,
-} from "../controllers/profession";
+import { create, getAll, getById, update } from "../controllers/project";
+import { remove } from "../controllers/profession";
 
 const router = Router();
 
