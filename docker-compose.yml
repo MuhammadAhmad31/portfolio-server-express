@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:latest
+    container_name: dbportfolioprod
+    environment:
+      POSTGRES_USER: admindb
+      POSTGRES_PASSWORD: redminote8
+      POSTGRES_DB: portfolio
+    ports:
+      - '5434:5432'
+    networks:
+      - portfolio
+
+  app:
+    build: .
+    container_name: server-portfolio
+    environment:
+      DATABASE_URL: postgresql://admindb:redminote8@database:5432/portfolio
+      PORT: 4000
+      JWT_SECRET: dksfdklsjfhadsiofh
+    ports:
+      - '4000:4000'
+    depends_on:
+      - database
+    networks:
+      - portfolio
+
+networks:
+  portfolio:
+    driver: bridge

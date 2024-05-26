@@ -1,5 +1,5 @@
-import { Education } from "@prisma/client";
 import prisma from "../config/prisma";
+import { Education } from "../types/education.type";
 
 export const createModel = async (body: Education) => {
   try {

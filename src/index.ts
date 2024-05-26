@@ -25,7 +25,7 @@ app.use(
   })
 );
 
-app.get("/", verifyToken, (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.json({ message: "Welcome to the Muham Portofio!" });
 });
 
