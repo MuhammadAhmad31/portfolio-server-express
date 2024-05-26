@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth";
 import professionRoute from "./routes/profession";
 import projectRoute from "./routes/project";
+import educationRoute from "./routes/education";
 import verifyToken from "./middleware/verifyToken";
 import secureRoutes from "./middleware/secureRoutes";
 
@@ -26,9 +27,11 @@ app.get("/", verifyToken, (req: Request, res: Response) => {
 
 app.use("/auth", authRoutes);
 
+// secure routes
 app.use("/api", secureRoutes);
 secureRoutes.use("/project", projectRoute);
 secureRoutes.use("/profession", professionRoute);
+secureRoutes.use("/education", educationRoute);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({

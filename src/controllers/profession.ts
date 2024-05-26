@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import prisma from "../config/prisma";
 import {
   createModel,
   deleteModel,
@@ -77,6 +76,12 @@ export const update = async (req: Request, res: Response) => {
 
   try {
     const profession = await updateModel(id, body);
+    if (!profession) {
+      return handleResponse(res, 404, {
+        message: "Profession not found.",
+        code: 404,
+      });
+    }
     handleResponse(res, 200, {
       message: "Profession updated successfully.",
       data: profession,
@@ -96,6 +101,12 @@ export const remove = async (req: Request, res: Response) => {
 
   try {
     const profession = await deleteModel(id);
+    if (!profession) {
+      return handleResponse(res, 404, {
+        message: "Profession not found.",
+        code: 404,
+      });
+    }
     handleResponse(res, 200, {
       message: "Profession deleted successfully.",
       data: profession,
