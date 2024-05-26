@@ -1,26 +1,26 @@
 import { Request, Response } from "express";
 import {
   createModel,
+  deleteModel,
   getAllModels,
   getModelById,
   updateModel,
-  deleteModel,
-} from "../models/education";
+} from "../models/certificate";
 import handleResponse from "../utils/handleResponse";
 
 export const create = async (req: Request, res: Response) => {
   const { body } = req;
 
   try {
-    const education = await createModel(body);
+    const certificate = await createModel(body);
     handleResponse(res, 201, {
-      message: "Education created successfully.",
-      data: education,
+      message: "Certificate created successfully.",
+      data: certificate,
       code: 201,
     });
   } catch (err) {
     handleResponse(res, 500, {
-      message: "Failed to create education.",
+      message: "Failed to create certificate.",
       error: err instanceof Error ? err.message : "Unknown error",
       code: 500,
     });
@@ -29,15 +29,15 @@ export const create = async (req: Request, res: Response) => {
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const educations = await getAllModels();
+    const certificates = await getAllModels();
     handleResponse(res, 200, {
-      message: "Educations retrieved successfully.",
-      data: educations,
+      message: "Certificates retrieved successfully.",
+      data: certificates,
       code: 200,
     });
   } catch (err) {
     handleResponse(res, 500, {
-      message: "Failed to retrieve educations.",
+      message: "Failed to retrieve certificates.",
       error: err instanceof Error ? err.message : "Unknown error",
       code: 500,
     });
@@ -48,22 +48,22 @@ export const getById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const education = await getModelById(id);
-    if (education) {
+    const certificate = await getModelById(id);
+    if (certificate) {
       handleResponse(res, 200, {
-        message: "Education retrieved successfully.",
-        data: education,
+        message: "Certificate retrieved successfully.",
+        data: certificate,
         code: 200,
       });
     } else {
       handleResponse(res, 404, {
-        message: "Education not found.",
+        message: "Certificate not found.",
         code: 404,
       });
     }
   } catch (err) {
     handleResponse(res, 500, {
-      message: "Failed to retrieve education.",
+      message: "Failed to retrieve certificate.",
       error: err instanceof Error ? err.message : "Unknown error",
       code: 500,
     });
@@ -75,21 +75,21 @@ export const update = async (req: Request, res: Response) => {
   const { body } = req;
 
   try {
-    const education = await updateModel(id, body);
-    if (!education) {
+    const certificate = await updateModel(id, body);
+    if (!certificate) {
       return handleResponse(res, 404, {
-        message: "Education not found.",
+        message: "Certificate not found.",
         code: 404,
       });
     }
     handleResponse(res, 200, {
-      message: "Education updated successfully.",
-      data: education,
+      message: "Certificate updated successfully.",
+      data: certificate,
       code: 200,
     });
   } catch (err) {
     handleResponse(res, 500, {
-      message: "Failed to update education.",
+      message: "Failed to update certificate.",
       error: err instanceof Error ? err.message : "Unknown error",
       code: 500,
     });
@@ -100,21 +100,21 @@ export const remove = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const education = await deleteModel(id);
-    if (!education) {
+    const certificate = await deleteModel(id);
+    if (!certificate) {
       return handleResponse(res, 404, {
-        message: "Education not found.",
+        message: "Certificate not found.",
         code: 404,
       });
     }
     handleResponse(res, 200, {
-      message: "Education removed successfully.",
-      data: education,
+      message: "Certificate deleted successfully.",
+      data: certificate,
       code: 200,
     });
   } catch (err) {
     handleResponse(res, 500, {
-      message: "Failed to remove education.",
+      message: "Failed to delete certificate.",
       error: err instanceof Error ? err.message : "Unknown error",
       code: 500,
     });

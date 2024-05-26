@@ -4,6 +4,10 @@ import authRoutes from "./routes/auth";
 import professionRoute from "./routes/profession";
 import projectRoute from "./routes/project";
 import educationRoute from "./routes/education";
+import certificateRoute from "./routes/certificate";
+import experienceRoute from "./routes/experience";
+import portfolioRoute from "./routes/portfolio";
+import skillRoute from "./routes/skill";
 import verifyToken from "./middleware/verifyToken";
 import secureRoutes from "./middleware/secureRoutes";
 
@@ -25,6 +29,7 @@ app.get("/", verifyToken, (req: Request, res: Response) => {
   res.json({ message: "Welcome to the Muham Portofio!" });
 });
 
+// public routes
 app.use("/auth", authRoutes);
 
 // secure routes
@@ -32,6 +37,10 @@ app.use("/api", secureRoutes);
 secureRoutes.use("/project", projectRoute);
 secureRoutes.use("/profession", professionRoute);
 secureRoutes.use("/education", educationRoute);
+secureRoutes.use("/certificate", certificateRoute);
+secureRoutes.use("/experience", experienceRoute);
+secureRoutes.use("/portfolio", portfolioRoute);
+secureRoutes.use("/skill", skillRoute);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({
